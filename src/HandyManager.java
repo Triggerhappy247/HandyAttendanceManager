@@ -7,7 +7,7 @@ public class HandyManager extends Application {
         launch(args);
     }
 
-    
+
     public void start(Stage primaryStage) {
 
     }
