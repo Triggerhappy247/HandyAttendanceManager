@@ -14,8 +14,10 @@ public class Faculty {
             if(rs.next()) {
                 System.out.println(rs.getString(1) + "  " + rs.getString(2));
                 String Subs[] = rs.getString(3).split(";");
-                for (String Sub : Subs) {
-                    System.out.println(Sub);
+                Subject Subjects[] = new Subject[Subs.length];
+                for (int i = 0; i < Subs.length;i++) {
+                    Subjects[i] = new Subject(Subs[i],db);
+                    System.out.println(Subjects[i].getIdSubject());
                 }
                 rs = db.queryDatabase(String.format("select * from timetable where idTimetable='%s';", user));
                 if(rs.next()) {
