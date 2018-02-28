@@ -2,7 +2,6 @@ import java.sql.*;
 
 public class DatabaseConnection {
 
-
     private Statement stmt;
     private Connection con;
 

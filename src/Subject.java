@@ -10,17 +10,15 @@ public class Subject {
         try {
             ResultSet rs = db.queryDatabase(String.format("select * from subject where idSubject = '%s'", idSubject));
             if(rs.next()){
-                setIdSubject(rs.getString(1));
-                setSubName(rs.getString(2));
-                setLecture(rs.getBoolean(3));
-                setTutorial(rs.getBoolean(4));
-                setLab(rs.getBoolean(5));
+                setIdSubject(rs.getString("idSubject"));
+                setSubName(rs.getString("subName"));
+                setLecture(rs.getBoolean("isLecture"));
+                setTutorial(rs.getBoolean("isTutorial"));
+                setLab(rs.getBoolean("isLab"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void setIdSubject(String idSubject) {
