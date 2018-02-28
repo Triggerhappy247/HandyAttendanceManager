@@ -8,9 +8,8 @@ public class Subject {
 
     public Subject(String idSubject,DatabaseConnection db) {
         try {
-            ResultSet rs = db.queryDatabase(String.format("select * from faculty where idFaculty = '%s'", idSubject));
+            ResultSet rs = db.queryDatabase(String.format("select * from subject where idSubject = '%s'", idSubject));
             if(rs.next()){
-                System.out.println("YO");
                 setIdSubject(rs.getString(1));
                 setSubName(rs.getString(2));
                 setLecture(rs.getBoolean(3));
