@@ -21,5 +21,6 @@ public class DatabaseRetrieval {
             System.out.println(slots.getIdTimeTableSlot() + " " + slots.getSubject().getSubName()+ " " + slots.getDayOfWeek() + " " + slots.getTime().toString() + " " + slots.getRoom() + " " + slots.getStudentList() + " " + slots.getSlotType());
 
         }
+        db.close();
     }
 }
