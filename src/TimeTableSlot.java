@@ -103,4 +103,6 @@ public class TimeTableSlot {
     public void setSlotType(String slotType) {
         this.slotType = slotType;
     }
+
+
 }
