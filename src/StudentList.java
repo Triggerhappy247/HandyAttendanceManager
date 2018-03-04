@@ -15,12 +15,12 @@ public class StudentList {
                 setListId(rs.getString("listId"));
                // setStudent(rs.getString("studentRange"));
                 String Student[] = rs.getString("studentRange").split(":");
-                Student student[] = new student[numberOfStudents];
+               /* Student student[] = new Student[numberOfStudents];
                 int i = 0;
                 for(i=0;i<2;i++){
-                    student[i] = new student(,db);
+                    student[i] = new Student();
                     i++;
-                }
+                }*/
                 setStudent(student);
             }
         } catch (SQLException e) {

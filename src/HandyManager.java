@@ -1,8 +1,12 @@
 import javafx.application.*;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.paint.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.*;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 
 public class HandyManager extends Application {
@@ -12,14 +16,13 @@ public class HandyManager extends Application {
     }
 
 
-    public void start(Stage stage) {
-        Group root = new Group();
-        Stop[] stops = new Stop[] {
-                new Stop(0, Color.DARKSLATEBLUE),
-                new Stop(1, Color.DARKRED)};
-        Scene scene = new Scene(root,new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops));
-        stage.setScene(scene);
-        stage.setTitle("Hello");
-        stage.show();
+    public void start(Stage stage) throws IOException{
+        AnchorPane content = null;
+        FXMLLoader loader = new FXMLLoader();
+        content = (AnchorPane) loader.load(new FileInputStream("C:\\Users\\qasim\\IdeaProjects\\HandyAttendanceManager\\src\\LoginPage.fxml"));
+            Scene scene = new Scene(content);
+            stage.setScene(scene);
+            stage.setTitle("Hello");
+            stage.show();
     }
 }
