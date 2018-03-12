@@ -37,11 +37,11 @@ public class TimeTableViewController {
 
     @FXML
     private void hoverStart(){
-        test.setStyle("-fx-background-color: #878787");
+        test.setStyle("-fx-background-color: #b7b7b7");
     }
 
     @FXML
     private void hoverEnd(){
-        test.setStyle("-fx-background-color: #b7b7b7");
+        test.setStyle("-fx-background-color: #f4f4f4");
     }
 }
