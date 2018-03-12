@@ -1,107 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="479.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TimeTableViewController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="472.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="472.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="472.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="472.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="472.0" />
+    <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" percentWidth="16.0" />
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
   </columnConstraints>
   <rowConstraints>
-      <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="208.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="119.0" minHeight="10.0" prefHeight="73.0" />
-      <RowConstraints maxHeight="119.0" minHeight="10.0" prefHeight="72.0" />
-      <RowConstraints maxHeight="119.0" minHeight="10.0" prefHeight="68.0" />
+      <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="15.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="15.0" vgrow="SOMETIMES" />
+    <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="73.0" />
+      <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="72.0" />
+      <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="68.0" />
   </rowConstraints>
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Label layoutX="51.0" layoutY="11.0" text="DAY/TIME" textFill="#3c25c2" />
+            <Label fx:id="test" alignment="CENTER" layoutX="54.0" layoutY="16.0" onMouseEntered="#hoverStart" onMouseExited="#hoverEnd" text="DAY/TIME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <Label layoutX="56.0" layoutY="30.0" text="Monday" />
+            <Label alignment="CENTER" layoutX="67.0" layoutY="28.0" text="Monday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Label fx:id="mondayDate" alignment="CENTER" layoutX="67.0" layoutY="36.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
-            <Label layoutX="56.0" layoutY="31.0" text="Tuesday" />
+            <Label alignment="CENTER" layoutX="61.0" layoutY="15.0" text="Tuesday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Label fx:id="tuesdayDate" alignment="CENTER" layoutX="61.0" layoutY="15.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Label layoutX="47.0" layoutY="28.0" text="Wednesday" />
+            <Label alignment="CENTER" layoutX="72.0" layoutY="20.0" text="Wednesday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Label fx:id="wednesdayDate" alignment="CENTER" layoutX="72.0" layoutY="28.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <Label layoutX="54.0" layoutY="28.0" text="Thursday" />
+            <Label alignment="CENTER" layoutX="60.0" layoutY="16.0" text="Thursday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Label fx:id="thursdayDate" alignment="CENTER" layoutX="60.0" layoutY="24.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
          <children>
-            <Label layoutX="62.0" layoutY="28.0" text="Friday" />
+            <Label alignment="CENTER" layoutX="53.0" layoutY="15.0" text="Friday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Label fx:id="fridayDate" alignment="CENTER" layoutX="53.0" layoutY="23.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
          <children>
-            <Label layoutX="55.0" layoutY="26.0" text="Saturday" />
+            <Label alignment="CENTER" layoutX="62.0" layoutY="20.0" text="Saturday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Label fx:id="saturdayDate" alignment="CENTER" layoutX="62.0" layoutY="28.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
          <children>
-            <Label layoutX="47.0" layoutY="11.0" text="9:00 - 10:50" />
+            <Label alignment="CENTER" layoutX="92.0" layoutY="16.0" text="9:00 - 10:50" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
          <children>
-            <Label layoutX="47.0" layoutY="11.0" text="11:15 - 1:15" />
+            <Label alignment="CENTER" layoutX="84.0" layoutY="17.0" text="11:00 - 13:15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
          <children>
-            <Label layoutX="51.0" layoutY="11.0" text="2:00 - 4:00" />
+            <Label alignment="CENTER" layoutX="71.0" layoutY="11.0" text="14:00 - 16:00" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
          <children>
-            <Label layoutX="51.0" layoutY="11.0" text="4:15 - 6:00" />
+            <Label alignment="CENTER" layoutX="64.0" layoutY="16.0" text="16:15 - 18:05" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      </AnchorPane>
    </children>
 </GridPane>

@@ -22,7 +22,8 @@ public class HandyManager extends Application {
         content = (AnchorPane) loader.load(new FileInputStream("C:\\Users\\qasim\\IdeaProjects\\HandyAttendanceManager\\src\\LoginPage.fxml"));
             Scene scene = new Scene(content);
             stage.setScene(scene);
-            stage.setTitle("Hello");
+            stage.setTitle("Login");
             stage.show();
     }
+
 }

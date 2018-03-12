@@ -1,8 +1,17 @@
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Calendar;
 
 
 public class LoginController {
@@ -11,8 +20,6 @@ public class LoginController {
     private TextField username;
     @FXML
     private PasswordField password;
-
-
 
     public LoginController() {
     }
@@ -29,6 +36,17 @@ public class LoginController {
 
         if(faculty != null)
         {
+            FXMLLoader loader = new FXMLLoader();
+            try {
+                 GridPane Timetable = (GridPane) loader.load(new FileInputStream("C:\\Users\\qasim\\IdeaProjects\\HandyAttendanceManager\\src\\TimeTableView.fxml"));
+                Scene scene = new Scene(Timetable);
+                Stage currentStage = (Stage)username.getScene().getWindow();
+                currentStage.setScene(scene);
+                currentStage.setTitle("Timetable");
+                currentStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
 
