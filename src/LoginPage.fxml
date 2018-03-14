@@ -19,5 +19,6 @@
          <image>
             <Image url="@NirmaLogo.png" />
          </image></ImageView>
+      <Label fx:id="incorrectLabel" layoutX="128.0" layoutY="140.0" text="Incorrect Username/Password" textAlignment="CENTER" textFill="#e40808" visible="false" />
    </children>
 </AnchorPane>

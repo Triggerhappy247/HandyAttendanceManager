@@ -22,7 +22,9 @@ public class Faculty {
                 }
                 setSubjects(subs);
                 setTimeTable(new TimeTable(getIdFaculty(),db));
-
+            }
+            else {
+                setIdFaculty("NULL");
             }
         } catch (SQLException e) {
             e.printStackTrace();

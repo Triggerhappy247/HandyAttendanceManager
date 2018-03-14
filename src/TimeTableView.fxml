@@ -31,38 +31,32 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <Label alignment="CENTER" layoutX="67.0" layoutY="28.0" text="Monday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Label fx:id="mondayDate" alignment="CENTER" layoutX="67.0" layoutY="36.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Label fx:id="mondayDate" alignment="CENTER" layoutX="67.0" layoutY="28.0" text="Monday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="10.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
-            <Label alignment="CENTER" layoutX="61.0" layoutY="15.0" text="Tuesday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Label fx:id="tuesdayDate" alignment="CENTER" layoutX="61.0" layoutY="15.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Label fx:id="tuesdayDate" alignment="CENTER" layoutX="61.0" layoutY="15.0" text="Tuesday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Label alignment="CENTER" layoutX="72.0" layoutY="20.0" text="Wednesday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Label fx:id="wednesdayDate" alignment="CENTER" layoutX="72.0" layoutY="28.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Label fx:id="wednesdayDate" alignment="CENTER" layoutX="72.0" layoutY="20.0" text="Wednesday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <Label alignment="CENTER" layoutX="60.0" layoutY="16.0" text="Thursday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Label fx:id="thursdayDate" alignment="CENTER" layoutX="60.0" layoutY="24.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Label fx:id="thursdayDate" alignment="CENTER" layoutX="60.0" layoutY="16.0" text="Thursday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
          <children>
-            <Label alignment="CENTER" layoutX="53.0" layoutY="15.0" text="Friday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Label fx:id="fridayDate" alignment="CENTER" layoutX="53.0" layoutY="23.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Label fx:id="fridayDate" alignment="CENTER" layoutX="53.0" layoutY="15.0" text="Friday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
          <children>
-            <Label alignment="CENTER" layoutX="62.0" layoutY="20.0" text="Saturday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Label fx:id="saturdayDate" alignment="CENTER" layoutX="62.0" layoutY="28.0" text="DATE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Label fx:id="saturdayDate" alignment="CENTER" layoutX="62.0" layoutY="20.0" text="Saturday" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">

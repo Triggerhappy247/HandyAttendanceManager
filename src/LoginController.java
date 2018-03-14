@@ -1,5 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,50 +14,47 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Calendar;
+import java.util.ResourceBundle;
 
 
-public class LoginController {
+public class LoginController implements Initializable{
 
+    private HandyManager manager;
     @FXML
     private TextField username;
     @FXML
     private PasswordField password;
+    @FXML
+    private Label incorrectLabel;
 
     public LoginController() {
     }
 
     @FXML
-    private void initialize(){
+    public void initialize(URL url, ResourceBundle rb){
     }
 
     @FXML
     private void loginFaculty(){
         DatabaseConnection db = new DatabaseConnection();
         db.connect("jdbc:mysql://localhost:3310/attendance_manager?useSSL=false");
-        Faculty faculty = new Faculty(username.getText(),password.getText(),db);
+        manager.setFaculty(new Faculty(username.getText(),password.getText(),db));
 
-        if(faculty != null)
+        if(manager.getFaculty().getIdFaculty() != "NULL")
         {
-            FXMLLoader loader = new FXMLLoader();
-            try {
-                 GridPane Timetable = (GridPane) loader.load(new FileInputStream("C:\\Users\\qasim\\IdeaProjects\\HandyAttendanceManager\\src\\TimeTableView.fxml"));
-                Scene scene = new Scene(Timetable);
-                Stage currentStage = (Stage)username.getScene().getWindow();
-                currentStage.setScene(scene);
-                currentStage.setResizable(true);
-                currentStage.setTitle("Timetable");
-                Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-                currentStage.setX((primScreenBounds.getWidth() - currentStage.getWidth()) / 2);
-                currentStage.setY((primScreenBounds.getHeight() - currentStage.getHeight()) / 2);
-                currentStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            manager.showTimeTable();
+        }
+        else
+        {
+            incorrectLabel.setVisible(true);
         }
 
         db.close();
     }
 
+    public void setManager(HandyManager manager) {
+        this.manager = manager;
+    }
 }
