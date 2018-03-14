@@ -1,14 +1,15 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
+
 
 
 public class TimeTableSlot {
+
     private String idTimeTableSlot;
     private Subject subject;
     private String studentList,dayOfWeek,room,slotType;
     private int slotLength;
-    private Time time;
+    private String time;
     private float averageAttendance;
 
     public TimeTableSlot(String idTimeTableSlot, DatabaseConnection db) {
@@ -19,7 +20,7 @@ public class TimeTableSlot {
                 setStudentList(rs.getString("studentList"));
                 setSlotLength(rs.getInt("slotLength"));
                 setSlotType(rs.getString("slotType"));
-                setTime(rs.getTime("time"));
+                setTime(rs.getString("time"));
                 setAverageAttendance(rs.getFloat("averageAttendance"));
                 setDayOfWeek(rs.getString("dayOfWeek"));
                 setRoom(rs.getString("room"));
@@ -80,11 +81,11 @@ public class TimeTableSlot {
         this.slotLength = slotLength;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
