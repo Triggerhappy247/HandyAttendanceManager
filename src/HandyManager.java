@@ -32,7 +32,6 @@ public class HandyManager extends Application {
 
     public void showTimeTable(){
         try {
-            System.out.println(faculty.getIdFaculty());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TimeTableView.fxml"));
             GridPane Timetable = (GridPane) loader.load();
             TimeTableViewController TTC = loader.getController();
