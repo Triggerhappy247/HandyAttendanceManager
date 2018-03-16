@@ -56,19 +56,31 @@ public class TimeTableViewController implements Initializable{
             EventHandler<MouseEvent> middle = new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    label.setStyle("-fx-background-color: #e0e0e0");
+                    String borderStyle = label.getStyle();
+                    if(borderStyle == "-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid" || borderStyle == "-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden")
+                        label.setStyle(borderStyle + ";-fx-background-color: #e0e0e0");
+                    else
+                        label.setStyle("-fx-background-color: #e0e0e0");
                 }
             };
             label.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    label.setStyle("-fx-background-color: #c3c3c3");
+                    String borderStyle = label.getStyle();
+                    if(borderStyle == "-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid" || borderStyle == "-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden")
+                        label.setStyle(borderStyle + ";-fx-background-color: #c3c3c3");
+                    else
+                        label.setStyle("-fx-background-color: #c3c3c3");
                 }
             });
             label.setOnMouseExited(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    label.setStyle("-fx-background-color: #f4f4f4");
+                    String borderStyle = label.getStyle();
+                    if(borderStyle == "-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid")
+                        label.setStyle("-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid;-fx-background-color: #f4f4f4");
+                    else
+                        label.setStyle("-fx-background-color: #f4f4f4");
                 }
             });
             label.setOnMouseEntered(middle);
@@ -96,14 +108,14 @@ public class TimeTableViewController implements Initializable{
                     case "11:15:00":
                     case "14:00:00":
                     case "16:15:00":
-                        filler.setStyle("-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid;");
+                        filler.setStyle("-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid");
                         SlotSpace.get(slotIndex).getChildren().addAll(slotLabel.get(labelIndex), filler);
                         break;
                     case "09:50:00":
                     case "12:15:00":
                     case "15:00:00":
                     case "17:15:00":
-                        filler.setStyle("-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden;");
+                        filler.setStyle("-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden");
                         SlotSpace.get(slotIndex).getChildren().addAll(filler, slotLabel.get(labelIndex));
                         break;
                 }

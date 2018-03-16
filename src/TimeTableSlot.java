@@ -26,7 +26,6 @@ public class TimeTableSlot {
                 setRoom(rs.getString("room"));
                 String subject = rs.getString("subject");
                 setSubject(new Subject(subject,db));
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
