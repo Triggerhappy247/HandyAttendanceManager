@@ -1,21 +1,10 @@
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
 
