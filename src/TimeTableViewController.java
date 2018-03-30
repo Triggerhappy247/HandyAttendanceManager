@@ -83,6 +83,15 @@ public class TimeTableViewController implements Initializable{
                         label.setStyle("-fx-background-color: #f4f4f4");
                 }
             });
+            label.setUserData(slot);
+            label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    Label clicked = (Label)event.getSource();
+                    TimeTableSlot clickedSlot = (TimeTableSlot) clicked.getUserData();
+                    System.out.println(clickedSlot.getIdTimeTableSlot());
+                }
+            });
             label.setOnMouseEntered(middle);
             label.setOnMouseReleased(middle);
             label.setAlignment(Pos.CENTER);
