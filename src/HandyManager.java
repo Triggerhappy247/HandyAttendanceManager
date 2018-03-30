@@ -35,6 +35,7 @@ public class HandyManager extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TimeTableView.fxml"));
             GridPane Timetable = (GridPane) loader.load();
             TimeTableViewController TTC = loader.getController();
+            TTC.setManager(this);
             TTC.populateTimeTable(faculty);
 
             Scene scene = new Scene(Timetable);
