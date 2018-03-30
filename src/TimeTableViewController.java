@@ -16,8 +16,9 @@ import static java.lang.Double.MAX_VALUE;
 
 public class TimeTableViewController implements Initializable{
 
+    private HandyManager manager;
     @FXML
-    private Label mondayDate,tuesdayDate,wednesdayDate,thursdayDate,fridayDate,saturdayDate,test;
+    private Label mondayDate,tuesdayDate,wednesdayDate,thursdayDate,fridayDate,saturdayDate;
 
     @FXML
     private ArrayList<HBox> SlotSpace;
@@ -56,31 +57,34 @@ public class TimeTableViewController implements Initializable{
             EventHandler<MouseEvent> middle = new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    String borderStyle = label.getStyle();
-                    if(borderStyle == "-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid" || borderStyle == "-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden")
-                        label.setStyle(borderStyle + ";-fx-background-color: #e0e0e0");
+                    String style = label.getStyle();
+                    if(style.contains("-fx-background-color"))
+                        style = style.replaceFirst("-fx-background-color: #[a-f,0-9]{6}","-fx-background-color: #e0e0e0");
                     else
-                        label.setStyle("-fx-background-color: #e0e0e0");
+                        style = style.concat("-fx-background-color: #e0e0e0");
+                    label.setStyle(style);
                 }
             };
             label.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    String borderStyle = label.getStyle();
-                    if(borderStyle == "-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid" || borderStyle == "-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden")
-                        label.setStyle(borderStyle + ";-fx-background-color: #c3c3c3");
+                    String style = label.getStyle();
+                    if(style.contains("-fx-background-color"))
+                        style = style.replaceFirst("-fx-background-color: #[a-f,0-9]{6}","-fx-background-color: #c3c3c3");
                     else
-                        label.setStyle("-fx-background-color: #c3c3c3");
+                        style = style.concat("-fx-background-color: #c3c3c3");
+                    label.setStyle(style);
                 }
             });
             label.setOnMouseExited(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    String borderStyle = label.getStyle();
-                    if(borderStyle == "-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid")
-                        label.setStyle("-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid;-fx-background-color: #f4f4f4");
+                    String style = label.getStyle();
+                    if(style.contains("-fx-background-color"))
+                        style = style.replaceFirst("-fx-background-color: #[a-f,0-9]{6}","-fx-background-color: #f4f4f4");
                     else
-                        label.setStyle("-fx-background-color: #f4f4f4");
+                        style = style.concat("-fx-background-color: #f4f4f4");
+                    label.setStyle(style);
                 }
             });
             label.setUserData(slot);
@@ -117,26 +121,26 @@ public class TimeTableViewController implements Initializable{
                     case "11:15:00":
                     case "14:00:00":
                     case "16:15:00":
-                        filler.setStyle("-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid");
+                        filler.setStyle("-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid;-fx-border-color: #898989;");
                         SlotSpace.get(slotIndex).getChildren().addAll(slotLabel.get(labelIndex), filler);
                         break;
                     case "09:50:00":
                     case "12:15:00":
                     case "15:00:00":
                     case "17:15:00":
-                        filler.setStyle("-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden");
+                        filler.setStyle("-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden;-fx-border-color: #898989;");
                         SlotSpace.get(slotIndex).getChildren().addAll(filler, slotLabel.get(labelIndex));
                         break;
                 }
             } else if(SlotSpace.get(slotIndex).getChildren().size() == 2){
                 Label first = (Label) SlotSpace.get(slotIndex).getChildren().get(0);
                 if(first.getText() != "                       ") {
-                    first.setStyle("-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden;");
+                    first.setStyle("-fx-border-width: 2;-fx-border-style: hidden solid hidden hidden;-fx-border-color: #898989;");
                     SlotSpace.get(slotIndex).getChildren().clear();
                     SlotSpace.get(slotIndex).getChildren().addAll(first, slotLabel.get(labelIndex));
                 } else{
                     Label second = (Label) SlotSpace.get(slotIndex).getChildren().get(1);
-                    second.setStyle("-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid;");
+                    second.setStyle("-fx-border-width: 2;-fx-border-style: hidden hidden hidden solid;-fx-border-color: #898989;");
                     SlotSpace.get(slotIndex).getChildren().clear();
                     SlotSpace.get(slotIndex).getChildren().addAll(slotLabel.get(labelIndex),second);
                 }
@@ -173,14 +177,7 @@ public class TimeTableViewController implements Initializable{
         return -1;
     }
 
-
-    @FXML
-    private void hoverStart(){
-        test.setStyle("-fx-background-color: #e0e0e0");
-    }
-
-    @FXML
-    private void hoverEnd(){
-        test.setStyle("-fx-background-color: #f4f4f4");
+    public void setManager(HandyManager manager) {
+        this.manager = manager;
     }
 }
