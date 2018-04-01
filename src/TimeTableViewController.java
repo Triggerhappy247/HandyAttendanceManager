@@ -7,7 +7,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Popup;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
