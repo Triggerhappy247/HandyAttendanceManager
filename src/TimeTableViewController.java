@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Popup;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -93,7 +94,7 @@ public class TimeTableViewController implements Initializable{
                 public void handle(MouseEvent event) {
                     Label clicked = (Label)event.getSource();
                     TimeTableSlot clickedSlot = (TimeTableSlot) clicked.getUserData();
-                    System.out.println(clickedSlot.getIdTimeTableSlot());
+                    manager.showSlot(clickedSlot);
                 }
             });
             label.setOnMouseEntered(middle);
