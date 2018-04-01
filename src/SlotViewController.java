@@ -26,6 +26,7 @@ public class SlotViewController implements Initializable {
     private TableView<SlotViewTableData> infoTable;
 
     private TimeTableSlot slotInfo;
+    private boolean isAttendance;
 
     public SlotViewController() {
     }
@@ -42,6 +43,12 @@ public class SlotViewController implements Initializable {
     }
 
     public void fillInfoTable(){
+
+        if(isAttendance())
+        {
+            attendanceButton.setDisable(true);
+        }
+
         List slotTable = new ArrayList();
         slotTable.add(new SlotViewTableData("Subject Code",slotInfo.getSubject().getIdSubject()));
         slotTable.add(new SlotViewTableData("Subject",slotInfo.getSubject().getSubName()));
@@ -60,5 +67,13 @@ public class SlotViewController implements Initializable {
 
     public void setSlotInfo(TimeTableSlot slotInfo) {
         this.slotInfo = slotInfo;
+    }
+
+    public void setAttendance(boolean attendance) {
+        isAttendance = attendance;
+    }
+
+    public boolean isAttendance() {
+        return isAttendance;
     }
 }

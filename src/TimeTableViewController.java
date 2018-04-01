@@ -18,6 +18,7 @@ import static java.lang.Double.MAX_VALUE;
 public class TimeTableViewController implements Initializable{
 
     private HandyManager manager;
+    private GregorianCalendar today;
     @FXML
     private Label mondayDate,tuesdayDate,wednesdayDate,thursdayDate,fridayDate,saturdayDate;
 
@@ -30,7 +31,7 @@ public class TimeTableViewController implements Initializable{
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
-        GregorianCalendar today = (GregorianCalendar) Calendar.getInstance();
+        today = (GregorianCalendar) Calendar.getInstance();
         today.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         mondayDate.setText(String.format("Monday\n%s", format.format(today.getTime())));
@@ -94,7 +95,25 @@ public class TimeTableViewController implements Initializable{
                 public void handle(MouseEvent event) {
                     Label clicked = (Label)event.getSource();
                     TimeTableSlot clickedSlot = (TimeTableSlot) clicked.getUserData();
-                    manager.showSlot(clickedSlot);
+                    today = (GregorianCalendar) Calendar.getInstance();
+                    GregorianCalendar selectedDay = (GregorianCalendar) Calendar.getInstance();
+                    switch (clickedSlot.getDayOfWeek())
+                    {
+                        case "Monday" : selectedDay.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+                            break;
+                        case "Tuesday" : selectedDay.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY);
+                            break;
+                        case "Wednesday" : selectedDay.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY);
+                            break;
+                        case "Thursday" : selectedDay.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY);
+                            break;
+                        case "Friday" : selectedDay.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
+                            break;
+                        case "Saturday" : selectedDay.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+                            break;
+                    }
+                    selectedDay.set(Calendar.HOUR_OF_DAY,Integer.parseInt(clickedSlot.getTime().substring(0,2)));
+                    manager.showSlot(clickedSlot,selectedDay.after(today));
                 }
             });
             label.setOnMouseEntered(middle);

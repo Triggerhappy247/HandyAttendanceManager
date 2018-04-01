@@ -52,12 +52,13 @@ public class HandyManager extends Application {
         }
     }
 
-    public void showSlot(TimeTableSlot slotInfo){
+    public void showSlot(TimeTableSlot slotInfo,boolean isFuture){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SlotView.fxml"));
             BorderPane SlotView = (BorderPane) loader.load();
             SlotViewController SVC = loader.getController();
             SVC.setSlotInfo(slotInfo);
+            SVC.setAttendance(isFuture);
             SVC.fillInfoTable();
 
             Scene scene = new Scene(SlotView);
