@@ -68,8 +68,12 @@ public class SlotViewController implements Initializable {
         );
         infoTable.setItems(slotTable);
 
-        property.setCellValueFactory(new PropertyValueFactory<SlotViewTableData,String>("property"));
-        value.setCellValueFactory(new PropertyValueFactory<SlotViewTableData,String>("value"));
+        property.setCellValueFactory(
+                new PropertyValueFactory<SlotViewTableData,String>("property")
+        );
+        value.setCellValueFactory(
+                new PropertyValueFactory<SlotViewTableData,String>("value")
+        );
     }
 
     public void setSlotInfo(TimeTableSlot slotInfo) {

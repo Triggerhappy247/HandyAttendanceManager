@@ -22,13 +22,6 @@ public class DatabaseRetrieval {
             System.out.println(slots.getIdTimeTableSlot() + " " + slots.getSubject().getSubName()+ " " + slots.getDayOfWeek() + " " + slots.getTime().toString() + " " + slots.getRoom() + " " + slots.getStudentList() + " " + slots.getSlotType());
 
         }
-
-        System.out.println("Students");
-        StudentList studentList = new StudentList(faculty.getTimeTable().getSlotIds()[5].getStudentList(),faculty.getTimeTable().getSlotIds()[5].getSubject().getIdSubject(),db);
-        for(ListIterator<Student> iterator = studentList.getStudent().listIterator();iterator.hasNext();){
-            Student i = iterator.next();
-            System.out.println(i.getIdStudent());
-        }
         db.close();
     }
 }

@@ -6,7 +6,7 @@ public class StudentList {
     private int numberOfStudents;
     private String listId;
     private ArrayList<Student> student;
-    public StudentList(String listId, String subjectID, DatabaseConnection db) {
+    public StudentList(String listId, DatabaseConnection db) {
         this.listId=listId;
         ResultSet rs;
         try {
@@ -20,7 +20,7 @@ public class StudentList {
                 int endNum = Integer.parseInt(Student[1].substring(5));
                 student = new ArrayList<>();
                 for(int i=startNum;i <= endNum;i++){
-                    student.add(new Student(String.format("%s%03d",startRoll,i),subjectID,db));
+                    student.add(new Student(String.format("%s%03d",startRoll,i),db));
                 }
                 setStudent(student);
             }

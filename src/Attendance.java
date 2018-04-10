@@ -7,7 +7,7 @@ import java.util.Calendar;
 public class Attendance {
 
     Subject subject;
-    String lectureAttendance, tutorialAttendance, labAttendance;
+
     ArrayList<Calendar> dates;
 
     public Attendance(String idStudent, String subjectID,DatabaseConnection db) {
@@ -15,9 +15,6 @@ public class Attendance {
             ResultSet rs = db.queryDatabase(String.format("select * from %s where idStudent = '%s'",subjectID.toLowerCase(),idStudent));
             if (rs.next()){
                 setSubject(new Subject(subjectID,db));
-                setLectureAttendance(rs.getString("lectureAttendance"));
-                setTutorialAttendance(rs.getString("tutorialAttendance"));
-                setLabAttendance(rs.getString("labAttendance"));
             }
             Calendar today = Calendar.getInstance();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -36,30 +33,6 @@ public class Attendance {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
-    }
-
-    public String getLectureAttendance() {
-        return lectureAttendance;
-    }
-
-    public void setLectureAttendance(String lectureAttendance) {
-        this.lectureAttendance = lectureAttendance;
-    }
-
-    public String getTutorialAttendance() {
-        return tutorialAttendance;
-    }
-
-    public void setTutorialAttendance(String tutorialAttendance) {
-        this.tutorialAttendance = tutorialAttendance;
-    }
-
-    public String getLabAttendance() {
-        return labAttendance;
-    }
-
-    public void setLabAttendance(String labAttendance) {
-        this.labAttendance = labAttendance;
     }
 
     public ArrayList<Calendar> getDates() {

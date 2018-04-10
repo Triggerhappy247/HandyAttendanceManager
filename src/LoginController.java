@@ -28,6 +28,7 @@ public class LoginController implements Initializable{
     @FXML
     private void loginFaculty(){
         DatabaseConnection db = new DatabaseConnection();
+        manager.setDb(db);
         db.connect("jdbc:mysql://localhost:3310/attendance_manager?useSSL=false");
         manager.setFaculty(new Faculty(username.getText(),password.getText(),db));
 
@@ -39,8 +40,6 @@ public class LoginController implements Initializable{
         {
             incorrectLabel.setVisible(true);
         }
-
-        db.close();
     }
 
     public void setManager(HandyManager manager) {

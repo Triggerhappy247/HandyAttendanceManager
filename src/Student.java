@@ -7,14 +7,14 @@ public class Student {
     private Attendance attendance;
     private Date lastUpdate;
 
-    public Student(String idStudent,String subjectID ,DatabaseConnection db) {
+    public Student(String idStudent,DatabaseConnection db) {
         try {
             ResultSet rs = db.queryDatabase(String.format("select * from student where idStudent = '%s'",idStudent));
             if (rs.next()){
                 setIdStudent(rs.getString("idStudent"));
                 setStudentName(rs.getString("studentName"));
                 setLastUpdate(rs.getDate("lastUpdate"));
-                setAttendance(new Attendance(getIdStudent(), subjectID, db));
+                //setAttendance(new Attendance(getIdStudent(), db));
             }
         } catch (SQLException e) {
             e.printStackTrace();

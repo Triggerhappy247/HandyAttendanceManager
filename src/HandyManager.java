@@ -14,6 +14,7 @@ public class HandyManager extends Application {
 
     private Stage primaryStage,secondaryStage;
     private Faculty faculty;
+    private DatabaseConnection db;
 
     public static void main(String[] args) {
         launch(args);
@@ -82,6 +83,8 @@ public class HandyManager extends Application {
             BorderPane SlotView = (BorderPane) loader.load();
             MarkAttendanceController MAC = loader.getController();
             MAC.setTimeTableSlot(timeTableSlot);
+            MAC.setStudentList(new StudentList(timeTableSlot.getStudentList(),db));
+            MAC.populateAttendanceTable();
 
 
             Scene scene = new Scene(SlotView);
@@ -108,5 +111,9 @@ public class HandyManager extends Application {
 
     public Faculty getFaculty() {
         return faculty;
+    }
+
+    public void setDb(DatabaseConnection db) {
+        this.db = db;
     }
 }

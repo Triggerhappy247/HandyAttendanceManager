@@ -15,10 +15,10 @@
             <TableView fx:id="attendanceTable" editable="true" layoutX="126.0" layoutY="14.0" prefHeight="400.0" prefWidth="451.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn fx:id="studentColumn" editable="false" prefWidth="150.0" resizable="false" text="Student ID" />
-                <TableColumn fx:id="attendanceColumn" prefWidth="250.0" resizable="false" text="Attendance">
+                <TableColumn prefWidth="250.0" resizable="false" text="Attendance">
                      <columns>
-                        <TableColumn prefWidth="125.0" text="Present" />
-                        <TableColumn minWidth="3.0" prefWidth="125.0" text="Absent" />
+                        <TableColumn fx:id="presentColumn" prefWidth="125.0" />
+                        <TableColumn fx:id="absentColumn" minWidth="3.0" prefWidth="125.0" />
                      </columns>
                   </TableColumn>
               </columns>
