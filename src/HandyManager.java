@@ -7,11 +7,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 
 public class HandyManager extends Application {
 
-    private Stage stage;
+    private Stage primaryStage,secondaryStage;
     private Faculty faculty;
 
     public static void main(String[] args) {
@@ -19,7 +20,7 @@ public class HandyManager extends Application {
     }
 
     public void start(Stage stage) throws IOException{
-        setStage(stage);
+        setPrimaryStage(stage);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         AnchorPane content = (AnchorPane) loader.load();
         LoginController loginController = loader.getController();
@@ -40,13 +41,13 @@ public class HandyManager extends Application {
             TTC.populateTimeTable(faculty);
 
             Scene scene = new Scene(Timetable);
-            stage.setScene(scene);
-            stage.setResizable(true);
-            stage.setTitle("Timetable of " + faculty.getIdFaculty() );
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(true);
+            primaryStage.setTitle("Timetable of " + faculty.getIdFaculty() );
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
-            stage.show();
+            primaryStage.setX((primScreenBounds.getWidth() - primaryStage.getWidth()) / 2);
+            primaryStage.setY((primScreenBounds.getHeight() - primaryStage.getHeight()) / 2);
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,26 +61,45 @@ public class HandyManager extends Application {
             SVC.setSlotInfo(slotInfo);
             SVC.setAttendance(isFuture);
             SVC.fillInfoTable();
+            SVC.setManager(this);
 
             Scene scene = new Scene(SlotView);
-            Stage secondaryStage = new Stage();
+            secondaryStage = new Stage();
             secondaryStage.setScene(scene);
             secondaryStage.initModality(Modality.WINDOW_MODAL);
-            secondaryStage.initOwner(stage);
+            secondaryStage.initOwner(primaryStage);
             secondaryStage.setResizable(false);
             secondaryStage.setTitle(String.format("%ss at %s",slotInfo.getDayOfWeek(),slotInfo.getTime()));
-            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-            secondaryStage.setX((primScreenBounds.getWidth() - secondaryStage.getWidth()) / 2);
-            secondaryStage.setY((primScreenBounds.getHeight() - secondaryStage.getHeight()) / 2);
             secondaryStage.show();
         } catch (IOException e) {
             e.getStackTrace();
         }
-
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    public void showMarkAttendance(TimeTableSlot timeTableSlot){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MarkAttendanceView.fxml"));
+            BorderPane SlotView = (BorderPane) loader.load();
+            MarkAttendanceController MAC = loader.getController();
+            MAC.setTimeTableSlot(timeTableSlot);
+
+
+            Scene scene = new Scene(SlotView);
+            secondaryStage = new Stage();
+            secondaryStage.setScene(scene);
+            secondaryStage.initModality(Modality.WINDOW_MODAL);
+            secondaryStage.initOwner(primaryStage);
+            secondaryStage.setResizable(false);
+            secondaryStage.setTitle("TEST");
+            secondaryStage.show();
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+    }
+
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     public void setFaculty(Faculty faculty) {

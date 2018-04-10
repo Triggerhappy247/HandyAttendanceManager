@@ -25,6 +25,7 @@ public class SlotViewController implements Initializable {
     @FXML
     private TableView<SlotViewTableData> infoTable;
 
+    private HandyManager manager;
     private TimeTableSlot slotInfo;
     private boolean isAttendance;
 
@@ -45,21 +46,27 @@ public class SlotViewController implements Initializable {
     public void fillInfoTable(){
 
         if(isAttendance())
-        {
             attendanceButton.setDisable(true);
+        else{
+            attendanceButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Stage secondary = (Stage)backButton.getScene().getWindow();
+                    secondary.hide();
+                    manager.showMarkAttendance(slotInfo);
+                }
+            });
         }
-
-        List slotTable = new ArrayList();
-        slotTable.add(new SlotViewTableData("Subject Code",slotInfo.getSubject().getIdSubject()));
-        slotTable.add(new SlotViewTableData("Subject",slotInfo.getSubject().getSubName()));
-        slotTable.add(new SlotViewTableData("Slot Type",slotInfo.getSlotType()));
-        slotTable.add(new SlotViewTableData("Day",slotInfo.getDayOfWeek()));
-        slotTable.add(new SlotViewTableData("Time",slotInfo.getTime()));
-        slotTable.add(new SlotViewTableData("Room",slotInfo.getRoom()));
-        slotTable.add(new SlotViewTableData("Student Batch",slotInfo.getStudentList()));
-
-        ObservableList<SlotViewTableData> data = FXCollections.observableList(slotTable);
-        infoTable.setItems(data);
+        final ObservableList<SlotViewTableData> slotTable = FXCollections.observableArrayList(
+        new SlotViewTableData("Subject Code",slotInfo.getSubject().getIdSubject()),
+        new SlotViewTableData("Subject",slotInfo.getSubject().getSubName()),
+        new SlotViewTableData("Slot Type",slotInfo.getSlotType()),
+        new SlotViewTableData("Day",slotInfo.getDayOfWeek()),
+        new SlotViewTableData("Time",slotInfo.getTime()),
+        new SlotViewTableData("Room",slotInfo.getRoom()),
+        new SlotViewTableData("Student Batch",slotInfo.getStudentList())
+        );
+        infoTable.setItems(slotTable);
 
         property.setCellValueFactory(new PropertyValueFactory<SlotViewTableData,String>("property"));
         value.setCellValueFactory(new PropertyValueFactory<SlotViewTableData,String>("value"));
@@ -75,5 +82,9 @@ public class SlotViewController implements Initializable {
 
     public boolean isAttendance() {
         return isAttendance;
+    }
+
+    public void setManager(HandyManager manager) {
+        this.manager = manager;
     }
 }
