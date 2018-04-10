@@ -16,6 +16,7 @@ public class MarkAttendanceController implements Initializable {
 
     private TimeTableSlot timeTableSlot;
     private StudentList studentList;
+    private ObservableList<StudentAttendanceTable> studentTableData;
 
     @FXML
     private TableView attendanceTable;
@@ -51,6 +52,7 @@ public class MarkAttendanceController implements Initializable {
         }
 
         attendanceTable.setItems(studentTableData);
+        this.studentTableData = studentTableData;
         studentColumn.setCellValueFactory(
                 new PropertyValueFactory<StudentAttendanceTable,String>("studentID")
         );
@@ -60,6 +62,21 @@ public class MarkAttendanceController implements Initializable {
         absentColumn.setCellValueFactory(
                 new PropertyValueFactory<StudentAttendanceTable,RadioButton>("absent")
         );
+
+        saveButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                saveData();
+            }
+        });
+    }
+
+    public void saveData(){
+        for(ListIterator<StudentAttendanceTable> iterator = studentTableData.listIterator(); iterator.hasNext();){
+            StudentAttendanceTable student = iterator.next();
+            RadioButton button = (RadioButton) student.getToggleGroup().getSelectedToggle();
+            System.out.println(student.getStudentID() +"-"+ button.getText());
+        }
     }
 
     public TimeTableSlot getTimeTableSlot() {
