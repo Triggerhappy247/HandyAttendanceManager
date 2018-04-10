@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseConnection {
 
@@ -21,6 +22,18 @@ public class DatabaseConnection {
 
     public ResultSet queryDatabase(String SQL) throws SQLException {
         return stmt.executeQuery(SQL);
+    }
+
+    public int updateDatabase(String SQL) throws SQLException {
+        return stmt.executeUpdate(SQL);
+    }
+
+    public int[] batchUpdate(String SQL[]) throws SQLException {
+        for (String sql : SQL){
+            stmt.addBatch(sql);
+        }
+
+        return stmt.executeBatch();
     }
 
     public void close()
