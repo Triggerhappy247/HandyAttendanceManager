@@ -83,7 +83,7 @@ public class HandyManager extends Application {
             BorderPane SlotView = (BorderPane) loader.load();
             MarkAttendanceController MAC = loader.getController();
             MAC.setTimeTableSlot(timeTableSlot);
-            MAC.setStudentList(new StudentList(timeTableSlot.getStudentList(),db));
+            MAC.setStudentList(new StudentList(timeTableSlot.getStudentList(),timeTableSlot,faculty.getTimeTable(),db));
             MAC.populateAttendanceTable();
 
 

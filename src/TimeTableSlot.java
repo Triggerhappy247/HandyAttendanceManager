@@ -32,6 +32,13 @@ public class TimeTableSlot {
         }
     }
 
+    public boolean isSameLecture(TimeTableSlot anotherSlot){
+        boolean result;
+
+        result = this.subject.getIdSubject().equalsIgnoreCase(anotherSlot.subject.getIdSubject()) && this.studentList.equalsIgnoreCase(anotherSlot.studentList);
+        return result;
+    }
+
     public String getIdTimeTableSlot() {
         return idTimeTableSlot;
     }

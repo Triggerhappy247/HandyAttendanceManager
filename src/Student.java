@@ -5,16 +5,14 @@ import java.sql.SQLException;
 public class Student {
     private String idStudent,studentName;
     private Attendance attendance;
-    private Date lastUpdate;
 
-    public Student(String idStudent,DatabaseConnection db) {
+    public Student(String idStudent,TimeTableSlot timeTableSlot,TimeTable timeTable,DatabaseConnection db) {
         try {
             ResultSet rs = db.queryDatabase(String.format("select * from student where idStudent = '%s'",idStudent));
             if (rs.next()){
                 setIdStudent(rs.getString("idStudent"));
                 setStudentName(rs.getString("studentName"));
-                setLastUpdate(rs.getDate("lastUpdate"));
-                //setAttendance(new Attendance(getIdStudent(), db));
+                setAttendance(new Attendance(getIdStudent(),timeTableSlot,timeTable,db));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -35,14 +33,6 @@ public class Student {
 
     public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
-    }
-
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
     }
 
     public String getStudentName() {

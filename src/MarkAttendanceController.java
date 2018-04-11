@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ListIterator;
 import java.util.ResourceBundle;
 
@@ -17,6 +18,7 @@ public class MarkAttendanceController implements Initializable {
     private TimeTableSlot timeTableSlot;
     private StudentList studentList;
     private ObservableList<StudentAttendanceTable> studentTableData;
+    private DatabaseConnection db;
 
     @FXML
     private TableView attendanceTable;
@@ -46,8 +48,7 @@ public class MarkAttendanceController implements Initializable {
 
     public void populateAttendanceTable() {
         final ObservableList<StudentAttendanceTable> studentTableData = FXCollections.observableArrayList();
-        for(ListIterator<Student> iterator = studentList.getStudent().listIterator(); iterator.hasNext();){
-            Student student = iterator.next();
+        for (Student student : studentList.getStudent()) {
             studentTableData.add(new StudentAttendanceTable(student.getIdStudent()));
         }
 
@@ -63,6 +64,8 @@ public class MarkAttendanceController implements Initializable {
                 new PropertyValueFactory<StudentAttendanceTable,RadioButton>("absent")
         );
 
+        dateList.setItems(FXCollections.observableList(studentList.getStudent().get(0).getAttendance().getAllDates()));
+
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -72,10 +75,9 @@ public class MarkAttendanceController implements Initializable {
     }
 
     public void saveData(){
-        for(ListIterator<StudentAttendanceTable> iterator = studentTableData.listIterator(); iterator.hasNext();){
-            StudentAttendanceTable student = iterator.next();
+        for (StudentAttendanceTable student : studentTableData) {
             RadioButton button = (RadioButton) student.getToggleGroup().getSelectedToggle();
-            System.out.println(student.getStudentID() +"-"+ button.getText());
+            System.out.println(student.getStudentID() + "-" + button.getText());
         }
     }
 
