@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.BatchUpdateException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -56,7 +57,7 @@ public class MarkAttendanceController implements Initializable {
     public void populateAttendanceTable() {
         final ObservableList<StudentAttendanceTable> studentTableData = FXCollections.observableArrayList();
         for (Student student : studentList.getStudent()) {
-            studentTableData.add(new StudentAttendanceTable(student.getIdStudent()));
+            studentTableData.add(new StudentAttendanceTable(student.getIdStudent(),this));
         }
 
         attendanceTable.setItems(studentTableData);
@@ -71,6 +72,27 @@ public class MarkAttendanceController implements Initializable {
                 new PropertyValueFactory<StudentAttendanceTable,RadioButton>("absent")
         );
         ObservableList<LocalDate> allDates = FXCollections.observableList(studentList.getStudent().get(0).getAttendance().getAllDates());
+
+        if(timeTableSlot.getSlotType().equalsIgnoreCase("Lecture"))
+        {
+            TimeTableSlot slots[] = timeTable.getSlotIds();
+            for(TimeTableSlot slot : slots){
+                if(timeTableSlot.isSameLecture(slot)){
+                    multipleSlots = String.format("'%s'",slot.getIdTimeTableSlot());
+                    setTimeTableSlot(slot);
+                    break;
+                }
+            }
+        }
+        System.out.println(multipleSlots);
+
+        dateList.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                setTable((LocalDate) newValue);
+            }
+        });
+
         dateList.setItems(allDates);
         dateList.setValue(allDates.get(allDates.size() - 1));
 
@@ -80,57 +102,58 @@ public class MarkAttendanceController implements Initializable {
                 saveData();
             }
         });
+    }
 
-        setMultipleSlots(String.format("'%s'",timeTableSlot.getIdTimeTableSlot()));
-        if(timeTableSlot.getSlotType().equalsIgnoreCase("Lecture"))
-        {
-            TimeTableSlot slots[] = timeTable.getSlotIds();
-            for(TimeTableSlot slot : slots){
-                if(timeTableSlot.isSameLecture(slot)){
-                    multipleSlots = String.format("%s or '%s'",multipleSlots,slot.getIdTimeTableSlot());
-                }
-            }
+    public void deleteRecord(String idStudent){
+        try {
+            saveButton.setDisable(false);
+            saveButton.setText("Save");
+            String primarykey = String.format("%s/%s/%s",dateList.getValue().toString(),timeTableSlot.getIdTimeTableSlot(),idStudent);
+            db.addBatch(String.format("delete from student_attendance_absent where primarykey = '%s'",primarykey));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
 
-        dateList.valueProperty().addListener(new ChangeListener() {
-            @Override
-            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                try {
-                    ResultSet rs = db.queryDatabase(String.format("select idStudent from student_attendance_absent where date = '%s' and timeTableSlot = %s;",newValue.toString(),getMultipleSlots()));
-                    StudentAttendanceTable tempStudent;
-                    if(rs.next()) {
-                        rs.previous();
-                        while (rs.next()) {
-                            tempStudent = new StudentAttendanceTable(rs.getString("idStudent"));
-                            studentTableData.get(studentTableData.indexOf(tempStudent)).getAbsent().setSelected(true);
-                        }
-                    }else
-                    {
-                        for(ListIterator<StudentAttendanceTable> iterator = studentTableData.listIterator();iterator.hasNext();){
-                            iterator.next().getPresent().setSelected(true);
-                        }
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+    public void saveRecord(String idStudent){
+        try {
+            saveButton.setDisable(false);
+            saveButton.setText("Save");
+            String primarykey = String.format("%s/%s/%s",dateList.getValue().toString(),timeTableSlot.getIdTimeTableSlot(),idStudent);
+            db.addBatch(String.format("insert into student_attendance_absent values('%s','%s','%s','%s');", primarykey, dateList.getValue(), timeTableSlot.getIdTimeTableSlot(), idStudent));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveData(){
-        RadioButton button;
-        String localDate = dateList.getValue().toString();
-        System.out.println(localDate);
-        for (StudentAttendanceTable student : studentTableData) {
-            button = (RadioButton) student.getToggleGroup().getSelectedToggle();
-            if(button.getText().equalsIgnoreCase("Absent")) {
-                try {
-                    db.updateDatabase(String.format("insert into student_attendance_absent (date,timeTableSlot,idStudent) values('%s','%s','%s');", localDate, timeTableSlot.getIdTimeTableSlot(), student.getStudentID()));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        saveButton.setDisable(true);
+        saveButton.setText("Saving...");
+        try {
+            db.batchUpdate();
+            saveButton.setText("Saved!");
+        } catch (BatchUpdateException e){
+            saveButton.setText("Saved?");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setTable(LocalDate localDate){
+        saveButton.setText("Save");
+        saveButton.setDisable(true);
+        try {
+            for (StudentAttendanceTable aStudentTableData : studentTableData) {
+                aStudentTableData.getPresent().setSelected(true);
             }
+            ResultSet rs = db.queryDatabase(String.format("select idStudent from student_attendance_absent where date = '%s' and timeTableSlot = %s;",localDate.toString(),getMultipleSlots()));
+            StudentAttendanceTable tempStudent;
+            while (rs.next()) {
+                tempStudent = new StudentAttendanceTable(rs.getString("idStudent"));
+                studentTableData.get(studentTableData.indexOf(tempStudent)).getAbsent().setSelected(true);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -160,5 +183,9 @@ public class MarkAttendanceController implements Initializable {
 
     public void setMultipleSlots(String multipleSlots) {
         this.multipleSlots = multipleSlots;
+    }
+
+    public Button getSaveButton() {
+        return saveButton;
     }
 }

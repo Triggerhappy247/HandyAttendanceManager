@@ -1,14 +1,21 @@
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 
 public class StudentAttendanceTable {
     private SimpleStringProperty studentID;
     private RadioButton present;
     private RadioButton absent;
     private ToggleGroup toggleGroup;
+    private MarkAttendanceController updater;
 
-    public StudentAttendanceTable(String studentID) {
+    public StudentAttendanceTable(String studentID,MarkAttendanceController updater) {
+        setUpdater(updater);
         this.studentID = new SimpleStringProperty(studentID);
         toggleGroup = new ToggleGroup();
         present = new RadioButton("Present");
@@ -16,6 +23,24 @@ public class StudentAttendanceTable {
         present.setToggleGroup(toggleGroup);
         absent.setToggleGroup(toggleGroup);
         present.setSelected(true);
+
+        present.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                updater.deleteRecord(getStudentID());
+            }
+        });
+
+        absent.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                updater.saveRecord(getStudentID());
+            }
+        });
+    }
+
+    public StudentAttendanceTable(String studentID) {
+        this.studentID = new SimpleStringProperty(studentID);
     }
 
     public String getStudentID() {
@@ -48,6 +73,10 @@ public class StudentAttendanceTable {
 
     public ToggleGroup getToggleGroup() {
         return toggleGroup;
+    }
+
+    public void setUpdater(MarkAttendanceController updater) {
+        this.updater = updater;
     }
 
     @Override

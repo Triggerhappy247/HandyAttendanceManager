@@ -46,17 +46,18 @@ public class SlotViewController implements Initializable {
     public void fillInfoTable(){
 
         if(isAttendance())
-            attendanceButton.setDisable(true);
+            attendanceButton.setText("View Attendance");
         else{
-            attendanceButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    Stage secondary = (Stage)backButton.getScene().getWindow();
-                    secondary.hide();
-                    manager.showMarkAttendance(slotInfo);
+            attendanceButton.setText("Mark Attendance");
+        }
+        attendanceButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage secondary = (Stage)backButton.getScene().getWindow();
+                secondary.hide();
+                manager.showMarkAttendance(slotInfo);
                 }
             });
-        }
         final ObservableList<SlotViewTableData> slotTable = FXCollections.observableArrayList(
         new SlotViewTableData("Subject Code",slotInfo.getSubject().getIdSubject()),
         new SlotViewTableData("Subject",slotInfo.getSubject().getSubName()),

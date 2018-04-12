@@ -28,12 +28,13 @@ public class DatabaseConnection {
         return stmt.executeUpdate(SQL);
     }
 
-    public int[] batchUpdate(String SQL[]) throws SQLException {
-        for (String sql : SQL){
-            stmt.addBatch(sql);
-        }
+    public void addBatch(String SQL) throws SQLException {
+        stmt.addBatch(SQL);
+    }
 
-        return stmt.executeBatch();
+    public void batchUpdate() throws SQLException {
+        stmt.executeBatch();
+        stmt.clearBatch();
     }
 
     public void close()
@@ -47,5 +48,9 @@ public class DatabaseConnection {
 
     public Connection getCon() {
         return con;
+    }
+
+    public Statement getStmt() {
+        return stmt;
     }
 }
