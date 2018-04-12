@@ -49,4 +49,15 @@ public class StudentAttendanceTable {
     public ToggleGroup getToggleGroup() {
         return toggleGroup;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        StudentAttendanceTable temp = (StudentAttendanceTable) obj;
+        return this.getStudentID().equalsIgnoreCase(temp.getStudentID());
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 }
