@@ -95,7 +95,7 @@ public class HandyManager extends Application {
             secondaryStage.initModality(Modality.WINDOW_MODAL);
             secondaryStage.initOwner(primaryStage);
             secondaryStage.setResizable(false);
-            secondaryStage.setTitle("TEST");
+            secondaryStage.setTitle(String.format("Attendance View - %s/%s/%s",timeTableSlot.getSubject().getIdSubject(),timeTableSlot.getSlotType(),timeTableSlot.getStudentList()));
             secondaryStage.show();
         } catch (IOException e) {
             e.getStackTrace();
