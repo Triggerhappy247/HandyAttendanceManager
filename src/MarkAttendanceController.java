@@ -84,7 +84,6 @@ public class MarkAttendanceController implements Initializable {
                 }
             }
         }
-        System.out.println(multipleSlots);
 
         dateList.valueProperty().addListener(new ChangeListener() {
             @Override
