@@ -153,13 +153,9 @@
                 <Menu mnemonicParsing="false" text="Navigation">
                   <items>
                     <MenuItem fx:id="logoutOption" mnemonicParsing="false" onAction="#logout" text="Logout" />
-                        <MenuItem fx:id="viewClassOption" mnemonicParsing="false" text="View Class Timetable" />
+                        <MenuItem fx:id="viewClassOption" mnemonicParsing="false" onAction="#showClassTimetable" text="View Class Timetable" />
+                    <MenuItem fx:id="aboutOption" mnemonicParsing="false" onAction="#showAboutPage" text="About" />
                         <MenuItem fx:id="closeOption" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem fx:id="aboutOption" mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
               </menus>

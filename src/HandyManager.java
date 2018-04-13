@@ -33,6 +33,24 @@ public class HandyManager extends Application {
         stage.show();
     }
 
+    public void aboutPage() throws IOException{
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AboutPage.fxml"));
+            AnchorPane SlotView = (AnchorPane) loader.load();
+
+            Scene scene = new Scene(SlotView);
+            secondaryStage = new Stage();
+            secondaryStage.setScene(scene);
+            secondaryStage.initModality(Modality.WINDOW_MODAL);
+            secondaryStage.initOwner(primaryStage);
+            secondaryStage.setResizable(false);
+            secondaryStage.setTitle("About Page");
+            secondaryStage.show();
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+    }
+
     public void logoutPage() throws IOException{
 
         db.close();

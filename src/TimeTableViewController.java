@@ -212,6 +212,16 @@ public class TimeTableViewController implements Initializable{
         manager.logoutPage();
    }
 
+   public void showClassTimetable(){
+       // TODO Show ClassTimetable
+   }
+
+   public void showAboutPage() throws IOException{
+        manager.aboutPage();
+   }
+
+
+
    public void setManager(HandyManager manager) {
         this.manager = manager;
     }
