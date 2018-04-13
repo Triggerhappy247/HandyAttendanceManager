@@ -33,10 +33,27 @@ public class HandyManager extends Application {
         stage.show();
     }
 
+    public void logoutPage() throws IOException{
+
+        db.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
+        AnchorPane content = (AnchorPane) loader.load();
+        LoginController loginController = loader.getController();
+        loginController.setManager(this);
+        Scene scene = new Scene(content);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle("Login");
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((primScreenBounds.getWidth() - primaryStage.getWidth()) / 2);
+        primaryStage.setY((primScreenBounds.getHeight() - primaryStage.getHeight()) / 2);
+        primaryStage.show();
+    }
+
     public void showTimeTable(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TimeTableView.fxml"));
-            GridPane Timetable = (GridPane) loader.load();
+            BorderPane Timetable = (BorderPane) loader.load();
             TimeTableViewController TTC = loader.getController();
             TTC.setManager(this);
             TTC.populateTimeTable(faculty);
@@ -117,5 +134,9 @@ public class HandyManager extends Application {
 
     public void setDb(DatabaseConnection db) {
         this.db = db;
+    }
+
+    public DatabaseConnection getDb() {
+        return db;
     }
 }

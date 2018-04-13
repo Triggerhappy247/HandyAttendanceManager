@@ -1,13 +1,17 @@
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -23,6 +27,9 @@ public class TimeTableViewController implements Initializable{
 
     @FXML
     private ArrayList<HBox> SlotSpace;
+
+    @FXML
+    private MenuItem logoutOption,viewClassOption,closeOption,aboutOption;
 
     public TimeTableViewController() {
 
@@ -180,9 +187,9 @@ public class TimeTableViewController implements Initializable{
            case "Saturday" :return TimeTableConstants.SATURDAY + getTimeRange(time);
        }
        return -1;
-    }
+   }
 
-    private int getTimeRange(String time){
+   private int getTimeRange(String time){
         switch (time){
             case "09:00:00" :
             case "09:50:00" : return TimeTableConstants.NINE;
@@ -194,9 +201,18 @@ public class TimeTableViewController implements Initializable{
             case "17:15:00" : return TimeTableConstants.SIXTEEN;
         }
         return -1;
-    }
+   }
 
-    public void setManager(HandyManager manager) {
+   public void closeWindow(){
+        manager.getDb().close();
+        Platform.exit();
+   }
+
+   public void logout() throws IOException {
+        manager.logoutPage();
+   }
+
+   public void setManager(HandyManager manager) {
         this.manager = manager;
     }
 }

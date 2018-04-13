@@ -15,7 +15,6 @@ import java.sql.BatchUpdateException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ListIterator;
 import java.util.ResourceBundle;
 
 public class MarkAttendanceController implements Initializable {

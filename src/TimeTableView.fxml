@@ -1,140 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <?import java.util.ArrayList?>
-<GridPane gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="479.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TimeTableViewController">
-  <columnConstraints>
-    <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" percentWidth="16.0" />
-      <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
-      <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
-      <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
-      <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="15.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="15.0" vgrow="SOMETIMES" />
-    <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="73.0" />
-      <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="72.0" />
-      <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="68.0" />
-  </rowConstraints>
-   <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
-
-
-          <children>
-            <Label alignment="CENTER" layoutX="54.0" layoutY="16.0" text="DAY/TIME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TimeTableViewController">
+   <center>
+      <GridPane gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="479.0" prefWidth="1006.0">
+        <columnConstraints>
+          <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" percentWidth="16.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="21.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="15.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="15.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="73.0" />
+            <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="72.0" />
+            <RowConstraints maxHeight="119.0" minHeight="10.0" percentHeight="15.0" prefHeight="68.0" />
+        </rowConstraints>
          <children>
-            <Label fx:id="mondayDate" alignment="CENTER" layoutX="67.0" layoutY="28.0" text="Monday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      
+      
+                <children>
+                  <Label alignment="CENTER" layoutX="54.0" layoutY="16.0" text="DAY/TIME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="mondayDate" alignment="CENTER" layoutX="67.0" layoutY="28.0" text="Monday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="tuesdayDate" alignment="CENTER" layoutX="61.0" layoutY="15.0" text="Tuesday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <Label fx:id="wednesdayDate" alignment="CENTER" layoutX="72.0" layoutY="20.0" text="Wednesday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <Label fx:id="thursdayDate" alignment="CENTER" layoutX="60.0" layoutY="16.0" text="Thursday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+               <children>
+                  <Label fx:id="fridayDate" alignment="CENTER" layoutX="53.0" layoutY="15.0" text="Friday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+               <children>
+                  <Label fx:id="saturdayDate" alignment="CENTER" layoutX="62.0" layoutY="20.0" text="Saturday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <Label alignment="CENTER" layoutX="92.0" layoutY="16.0" text="9:00 - 10:50" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <Label alignment="CENTER" layoutX="84.0" layoutY="17.0" text="11:15 - 13:15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+               <children>
+                  <Label alignment="CENTER" layoutX="71.0" layoutY="11.0" text="14:00 - 16:00" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+               <children>
+                  <Label alignment="CENTER" layoutX="64.0" layoutY="16.0" text="16:15 - 18:05" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <HBox fx:id="monday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <HBox fx:id="monday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <HBox fx:id="monday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <HBox fx:id="monday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <HBox fx:id="tuesday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <HBox fx:id="tuesday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <HBox fx:id="tuesday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <HBox fx:id="tuesday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <HBox fx:id="wednesday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <HBox fx:id="wednesday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <HBox fx:id="wednesday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <HBox fx:id="wednesday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <HBox fx:id="thursday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <HBox fx:id="thursday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <HBox fx:id="thursday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <HBox fx:id="thursday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <HBox fx:id="friday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <HBox fx:id="friday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <HBox fx:id="friday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <HBox fx:id="friday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <HBox fx:id="saturday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <HBox fx:id="saturday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <HBox fx:id="saturday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <HBox fx:id="saturday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      
+             <fx:define>
+                     <ArrayList fx:id="SlotSpace">
+                         <fx:reference source="monday9" />
+                         <fx:reference source="monday11" />
+                         <fx:reference source="monday14" />
+                         <fx:reference source="monday16" />
+                         <fx:reference source="tuesday9" />
+                         <fx:reference source="tuesday11" />
+                         <fx:reference source="tuesday14" />
+                         <fx:reference source="tuesday16" />
+                         <fx:reference source="wednesday9" />
+                         <fx:reference source="wednesday11" />
+                         <fx:reference source="wednesday14" />
+                         <fx:reference source="wednesday16" />
+                         <fx:reference source="thursday9" />
+                         <fx:reference source="thursday11" />
+                         <fx:reference source="thursday14" />
+                         <fx:reference source="thursday16" />
+                         <fx:reference source="friday9" />
+                         <fx:reference source="friday11" />
+                         <fx:reference source="friday14" />
+                         <fx:reference source="friday16" />
+                         <fx:reference source="saturday9" />
+                         <fx:reference source="saturday11" />
+                         <fx:reference source="saturday14" />
+                         <fx:reference source="saturday16" />
+                     </ArrayList>
+             </fx:define>
          </children>
-      </AnchorPane>
-      <AnchorPane layoutX="10.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+      </GridPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="18.0" prefWidth="1006.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="tuesdayDate" alignment="CENTER" layoutX="61.0" layoutY="15.0" text="Tuesday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <MenuBar layoutY="-3.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Navigation">
+                  <items>
+                    <MenuItem fx:id="logoutOption" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                        <MenuItem fx:id="viewClassOption" mnemonicParsing="false" text="View Class Timetable" />
+                        <MenuItem fx:id="closeOption" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="aboutOption" mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-         <children>
-            <Label fx:id="wednesdayDate" alignment="CENTER" layoutX="72.0" layoutY="20.0" text="Wednesday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
-         <children>
-            <Label fx:id="thursdayDate" alignment="CENTER" layoutX="60.0" layoutY="16.0" text="Thursday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
-         <children>
-            <Label fx:id="fridayDate" alignment="CENTER" layoutX="53.0" layoutY="15.0" text="Friday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
-         <children>
-            <Label fx:id="saturdayDate" alignment="CENTER" layoutX="62.0" layoutY="20.0" text="Saturday" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-         <children>
-            <Label alignment="CENTER" layoutX="92.0" layoutY="16.0" text="9:00 - 10:50" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-         <children>
-            <Label alignment="CENTER" layoutX="84.0" layoutY="17.0" text="11:15 - 13:15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
-         <children>
-            <Label alignment="CENTER" layoutX="71.0" layoutY="11.0" text="14:00 - 16:00" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
-         <children>
-            <Label alignment="CENTER" layoutX="64.0" layoutY="16.0" text="16:15 - 18:05" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <HBox fx:id="monday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <HBox fx:id="monday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <HBox fx:id="monday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <HBox fx:id="monday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-      <HBox fx:id="tuesday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <HBox fx:id="tuesday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <HBox fx:id="tuesday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <HBox fx:id="tuesday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-      <HBox fx:id="wednesday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <HBox fx:id="wednesday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <HBox fx:id="wednesday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-      <HBox fx:id="wednesday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-      <HBox fx:id="thursday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <HBox fx:id="thursday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <HBox fx:id="thursday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-      <HBox fx:id="thursday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-      <HBox fx:id="friday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <HBox fx:id="friday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <HBox fx:id="friday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-      <HBox fx:id="friday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-      <HBox fx:id="saturday9" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <HBox fx:id="saturday11" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <HBox fx:id="saturday14" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-      <HBox fx:id="saturday16" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-
-       <fx:define>
-               <ArrayList fx:id="SlotSpace">
-                   <fx:reference source="monday9" />
-                   <fx:reference source="monday11" />
-                   <fx:reference source="monday14" />
-                   <fx:reference source="monday16" />
-                   <fx:reference source="tuesday9" />
-                   <fx:reference source="tuesday11" />
-                   <fx:reference source="tuesday14" />
-                   <fx:reference source="tuesday16" />
-                   <fx:reference source="wednesday9" />
-                   <fx:reference source="wednesday11" />
-                   <fx:reference source="wednesday14" />
-                   <fx:reference source="wednesday16" />
-                   <fx:reference source="thursday9" />
-                   <fx:reference source="thursday11" />
-                   <fx:reference source="thursday14" />
-                   <fx:reference source="thursday16" />
-                   <fx:reference source="friday9" />
-                   <fx:reference source="friday11" />
-                   <fx:reference source="friday14" />
-                   <fx:reference source="friday16" />
-                   <fx:reference source="saturday9" />
-                   <fx:reference source="saturday11" />
-                   <fx:reference source="saturday14" />
-                   <fx:reference source="saturday16" />
-               </ArrayList>
-       </fx:define>
-   </children>
-</GridPane>
+   </top>
+</BorderPane>
