@@ -7,7 +7,7 @@ public class TimeTableSlot {
 
     private String idTimeTableSlot;
     private Subject subject;
-    private String studentList,dayOfWeek,room,slotType;
+    private String studentList,dayOfWeek,room,slotType,idFaculty;
     private int slotLength;
     private String time;
     private float averageAttendance;
@@ -111,5 +111,11 @@ public class TimeTableSlot {
         this.slotType = slotType;
     }
 
+    public String getIdFaculty() {
+        return idFaculty;
+    }
 
+    public void setIdFaculty(String idFaculty) {
+        this.idFaculty = idFaculty;
+    }
 }

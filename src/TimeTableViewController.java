@@ -1,9 +1,11 @@
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -13,7 +15,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Year;
 import java.util.*;
 
 import static java.lang.Double.MAX_VALUE;
@@ -29,7 +35,7 @@ public class TimeTableViewController implements Initializable{
     private ArrayList<HBox> SlotSpace;
 
     @FXML
-    private MenuItem logoutOption,viewClassOption,closeOption,aboutOption;
+    private MenuItem logoutOption,closeOption,aboutOption;
 
     public TimeTableViewController() {
 
@@ -53,8 +59,9 @@ public class TimeTableViewController implements Initializable{
         saturdayDate.setText(String.format("Saturday\n%s", format.format(today.getTime())));
     }
 
-    public void populateTimeTable(Faculty faculty){
-        ArrayList<TimeTableSlot> slots = new ArrayList<TimeTableSlot>(Arrays.asList(faculty.getTimeTable().getSlotIds()));
+    public void populateTimeTable(TimeTable timeTable){
+
+        ArrayList<TimeTableSlot> slots = new ArrayList<TimeTableSlot>(Arrays.asList(timeTable.getSlotIds()));
         ArrayList<Label> slotLabel = new ArrayList<Label>();
         String content;
 
@@ -172,7 +179,6 @@ public class TimeTableViewController implements Initializable{
                 }
             }
         }
-
     }
 
    private int getPosition(TimeTableSlot slot){
@@ -203,17 +209,13 @@ public class TimeTableViewController implements Initializable{
         return -1;
    }
 
-   public void closeWindow(){
+   public void closeApplication(){
         manager.getDb().close();
         Platform.exit();
    }
 
    public void logout() throws IOException {
         manager.logoutPage();
-   }
-
-   public void showClassTimetable(){
-       // TODO Show ClassTimetable
    }
 
    public void showAboutPage() throws IOException{

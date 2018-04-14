@@ -32,12 +32,6 @@ public class Faculty {
 
     }
 
-    public Faculty(TimeTable timeTable) {
-        this.timeTable = timeTable;
-        setIdFaculty("NULL");
-        setPassword("NULL");
-    }
-
     public String getIdFaculty() {
         return idFaculty;
     }

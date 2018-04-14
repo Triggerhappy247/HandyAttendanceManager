@@ -5,11 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.BatchUpdateException;
 import java.sql.ResultSet;
@@ -37,6 +43,9 @@ public class MarkAttendanceController implements Initializable {
 
     @FXML
     private ComboBox dateList;
+
+    @FXML
+    private Label cancelLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,6 +81,7 @@ public class MarkAttendanceController implements Initializable {
         );
         ObservableList<LocalDate> allDates = FXCollections.observableList(studentList.getStudent().get(0).getAttendance().getAllDates());
 
+        multipleSlots = String.format("'%s'",timeTableSlot.getIdTimeTableSlot());
         if(timeTableSlot.getSlotType().equalsIgnoreCase("Lecture"))
         {
             TimeTableSlot slots[] = timeTable.getSlotIds();
@@ -104,9 +114,11 @@ public class MarkAttendanceController implements Initializable {
 
     public void deleteRecord(String idStudent){
         try {
-            saveButton.setDisable(false);
-            saveButton.setText("Save");
-            cancelButton.setText("Cancel");
+            if(!cancelLabel.isVisible()) {
+                saveButton.setDisable(false);
+                saveButton.setText("Save");
+                cancelButton.setText("Cancel");
+            }
             String primarykey = String.format("%s/%s/%s",dateList.getValue().toString(),timeTableSlot.getIdTimeTableSlot(),idStudent);
             db.addBatch(String.format("delete from student_attendance_absent where primarykey = '%s'",primarykey));
         } catch (SQLException e) {
@@ -116,11 +128,43 @@ public class MarkAttendanceController implements Initializable {
 
     public void saveRecord(String idStudent){
         try {
-            saveButton.setDisable(false);
-            saveButton.setText("Save");
-            cancelButton.setText("Cancel");
-            String primarykey = String.format("%s/%s/%s",dateList.getValue().toString(),timeTableSlot.getIdTimeTableSlot(),idStudent);
-            db.addBatch(String.format("insert into student_attendance_absent values('%s','%s','%s','%s');", primarykey, dateList.getValue(), timeTableSlot.getIdTimeTableSlot(), idStudent));
+            if(!cancelLabel.isVisible()) {
+                saveButton.setDisable(false);
+                saveButton.setText("Save");
+                cancelButton.setText("Cancel");
+            }
+            String primary = String.format("%s/%s/%s",dateList.getValue().toString(),timeTableSlot.getIdTimeTableSlot(),idStudent);
+            db.addBatch(String.format("insert into student_attendance_absent values('%s','%s','%s','%s');", primary, dateList.getValue(), timeTableSlot.getIdTimeTableSlot(), idStudent));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void cancelSlot(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("cancelConfirmation.fxml"));
+            AnchorPane confirmView = (AnchorPane) loader.load();
+            CancelConfirm CCC = loader.getController();
+            CCC.setMAC(this);
+
+            Scene scene = new Scene(confirmView);
+            Stage confirm = new Stage();
+            confirm.setScene(scene);
+            confirm.initModality(Modality.WINDOW_MODAL);
+            confirm.initOwner((Stage)saveButton.getScene().getWindow());
+            confirm.setResizable(false);
+            confirm.setTitle(String.format("Cancel %s/%s/%s on %s",timeTableSlot.getSubject().getIdSubject(),timeTableSlot.getSlotType(),timeTableSlot.getStudentList(),dateList.getValue().toString()));
+            confirm.show();
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+    }
+
+    public void confirmCancel(){
+        try {
+            String primary = String.format("%s/%s/%s",dateList.getValue().toString(),timeTableSlot.getIdTimeTableSlot(),"Cancelled");
+            db.updateDatabase(String.format("insert into student_attendance_absent values('%s','%s','%s','%s');", primary, dateList.getValue(), timeTableSlot.getIdTimeTableSlot(),"Cancelled"));
+            setTable((LocalDate) dateList.getValue());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,8 +176,10 @@ public class MarkAttendanceController implements Initializable {
         try {
             db.batchUpdate();
             saveButton.setText("Saved!");
+            cancelButton.setText("Close");
         } catch (BatchUpdateException e){
             saveButton.setText("Saved?");
+            cancelButton.setText("Close");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -143,15 +189,28 @@ public class MarkAttendanceController implements Initializable {
         saveButton.setText("Save");
         saveButton.setDisable(true);
         cancelButton.setText("Close");
+        cancelLabel.setVisible(false);
+        boolean cancelled = false;
         try {
             for (StudentAttendanceTable aStudentTableData : studentTableData) {
                 aStudentTableData.getPresent().setSelected(true);
             }
             ResultSet rs = db.queryDatabase(String.format("select idStudent from student_attendance_absent where date = '%s' and timeTableSlot = %s;",localDate.toString(),getMultipleSlots()));
             StudentAttendanceTable tempStudent;
-            while (rs.next()) {
+            if(rs.next()){
+                cancelled = rs.getString("idStudent").contentEquals("Cancelled");
+                System.out.println(cancelled + " " + rs.getString("idStudent"));
+                rs.previous();
+            }
+            while (rs.next() && !cancelled) {
                 tempStudent = new StudentAttendanceTable(rs.getString("idStudent"));
                 studentTableData.get(studentTableData.indexOf(tempStudent)).getAbsent().setSelected(true);
+            }
+            if (cancelled){
+                cancelLabel.setVisible(true);
+                for (StudentAttendanceTable aStudentTableData : studentTableData) {
+                    aStudentTableData.getAbsent().setSelected(true);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

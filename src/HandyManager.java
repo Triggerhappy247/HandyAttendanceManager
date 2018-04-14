@@ -4,10 +4,8 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.*;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 
 public class HandyManager extends Application {
@@ -74,7 +72,7 @@ public class HandyManager extends Application {
             BorderPane Timetable = (BorderPane) loader.load();
             TimeTableViewController TTC = loader.getController();
             TTC.setManager(this);
-            TTC.populateTimeTable(faculty);
+            TTC.populateTimeTable(faculty.getTimeTable());
 
             Scene scene = new Scene(Timetable);
             primaryStage.setScene(scene);
