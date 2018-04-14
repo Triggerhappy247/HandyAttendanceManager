@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -39,7 +38,7 @@ public class MarkAttendanceController implements Initializable {
     private TableColumn studentColumn,presentColumn,absentColumn;
 
     @FXML
-    private Button saveButton,cancelButton;
+    private Button saveButton,cancelButton,cancelSlot;
 
     @FXML
     private ComboBox dateList;
@@ -189,6 +188,7 @@ public class MarkAttendanceController implements Initializable {
         saveButton.setText("Save");
         saveButton.setDisable(true);
         cancelButton.setText("Close");
+        cancelSlot.setVisible(true);
         cancelLabel.setVisible(false);
         boolean cancelled = false;
         try {
@@ -199,15 +199,16 @@ public class MarkAttendanceController implements Initializable {
             StudentAttendanceTable tempStudent;
             if(rs.next()){
                 cancelled = rs.getString("idStudent").contentEquals("Cancelled");
-                System.out.println(cancelled + " " + rs.getString("idStudent"));
                 rs.previous();
             }
             while (rs.next() && !cancelled) {
                 tempStudent = new StudentAttendanceTable(rs.getString("idStudent"));
                 studentTableData.get(studentTableData.indexOf(tempStudent)).getAbsent().setSelected(true);
+                cancelSlot.setVisible(false);
             }
             if (cancelled){
                 cancelLabel.setVisible(true);
+                cancelSlot.setVisible(false);
                 for (StudentAttendanceTable aStudentTableData : studentTableData) {
                     aStudentTableData.getAbsent().setSelected(true);
                 }
