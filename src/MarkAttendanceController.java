@@ -117,9 +117,9 @@ public class MarkAttendanceController implements Initializable {
                 saveButton.setDisable(false);
                 saveButton.setText("Save");
                 cancelButton.setText("Cancel");
+                String primarykey = String.format("%s/%s/%s", dateList.getValue().toString(), timeTableSlot.getIdTimeTableSlot(), idStudent);
+                db.addBatch(String.format("delete from student_attendance_absent where primarykey = '%s'", primarykey));
             }
-            String primarykey = String.format("%s/%s/%s",dateList.getValue().toString(),timeTableSlot.getIdTimeTableSlot(),idStudent);
-            db.addBatch(String.format("delete from student_attendance_absent where primarykey = '%s'",primarykey));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -131,9 +131,9 @@ public class MarkAttendanceController implements Initializable {
                 saveButton.setDisable(false);
                 saveButton.setText("Save");
                 cancelButton.setText("Cancel");
+                String primary = String.format("%s/%s/%s", dateList.getValue().toString(), timeTableSlot.getIdTimeTableSlot(), idStudent);
+                db.addBatch(String.format("insert into student_attendance_absent values('%s','%s','%s','%s');", primary, dateList.getValue(), timeTableSlot.getIdTimeTableSlot(), idStudent));
             }
-            String primary = String.format("%s/%s/%s",dateList.getValue().toString(),timeTableSlot.getIdTimeTableSlot(),idStudent);
-            db.addBatch(String.format("insert into student_attendance_absent values('%s','%s','%s','%s');", primary, dateList.getValue(), timeTableSlot.getIdTimeTableSlot(), idStudent));
         } catch (SQLException e) {
             e.printStackTrace();
         }
