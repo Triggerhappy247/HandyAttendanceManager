@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,7 +32,7 @@ public class MarkAttendanceController implements Initializable {
     private DatabaseConnection db;
     private TimeTable timeTable;
     private String multipleSlots;
-    private ArrayList<LocalDate> frozenDates;
+    private ArrayList<LocalDate> frozenDates,allDates;
 
     @FXML
     private TableView attendanceTable;
@@ -50,6 +51,7 @@ public class MarkAttendanceController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        attendanceTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         dateList.setVisibleRowCount(7);
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -80,7 +82,9 @@ public class MarkAttendanceController implements Initializable {
         absentColumn.setCellValueFactory(
                 new PropertyValueFactory<StudentAttendanceTable,RadioButton>("absent")
         );
-        ObservableList<LocalDate> allDates = FXCollections.observableList(Attendance.getAllDates(timeTableSlot,timeTable,db));
+
+        setAllDates(Attendance.getAllDates(timeTableSlot,timeTable,db));
+        ObservableList<LocalDate> allDates = FXCollections.observableList(getAllDates());
 
         multipleSlots = String.format("'%s'",timeTableSlot.getIdTimeTableSlot());
         if(timeTableSlot.getSlotType().equalsIgnoreCase("Lecture"))
@@ -230,6 +234,31 @@ public class MarkAttendanceController implements Initializable {
         }
     }
 
+    public void showStudentAttendance(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SingleStudentAttendance.fxml"));
+            BorderPane singleStudentView = (BorderPane) loader.load();
+            SingleStudentAttendanceController SSAC = loader.getController();
+            String idStudent = null;
+            try {
+                idStudent = attendanceTable.getSelectionModel().getSelectedItem().toString();
+                SSAC.populateStudentTable(idStudent,multipleSlots,getAllDates(),db);
+                Scene scene = new Scene(singleStudentView);
+                Stage confirm = new Stage();
+                confirm.setScene(scene);
+                confirm.initModality(Modality.WINDOW_MODAL);
+                confirm.initOwner((Stage)saveButton.getScene().getWindow());
+                confirm.setResizable(false);
+                confirm.setTitle(String.format("%s's Attendance %s/%s/%s",idStudent,timeTableSlot.getSubject().getIdSubject(),timeTableSlot.getSlotType(),timeTableSlot.getStudentList()));
+                confirm.show();
+            } catch (NullPointerException e) {
+
+            }
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+    }
+
     public TimeTableSlot getTimeTableSlot() {
         return timeTableSlot;
     }
@@ -268,5 +297,13 @@ public class MarkAttendanceController implements Initializable {
 
     public void setFrozenDates(ArrayList<LocalDate> frozenDates) {
         this.frozenDates = frozenDates;
+    }
+
+    public void setAllDates(ArrayList<LocalDate> allDates) {
+        this.allDates = allDates;
+    }
+
+    public ArrayList<LocalDate> getAllDates() {
+        return allDates;
     }
 }
