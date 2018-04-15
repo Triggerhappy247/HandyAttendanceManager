@@ -1,4 +1,3 @@
-import java.util.ListIterator;
 import java.util.Scanner;
 
 public class DatabaseRetrieval {
