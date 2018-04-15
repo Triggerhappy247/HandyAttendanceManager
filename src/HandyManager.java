@@ -118,6 +118,7 @@ public class HandyManager extends Application {
             MAC.setTimeTableSlot(timeTableSlot);
             MAC.setDb(db);
             MAC.setTimeTable(faculty.getTimeTable());
+            MAC.setFrozenDates(Attendance.getFreezeDates(getDb()));
             MAC.setStudentList(new StudentList(timeTableSlot.getStudentList(),timeTableSlot,faculty.getTimeTable(),db));
             MAC.populateAttendanceTable();
 

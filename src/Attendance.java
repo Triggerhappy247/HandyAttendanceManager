@@ -7,36 +7,29 @@ import java.util.ListIterator;
 
 public class Attendance {
 
-    private ArrayList<TimeTableSlot> timeSlots;
-    private ArrayList<LocalDate> allDates;
-    private ArrayList<LocalDate> absentDates;
+    public static ArrayList<LocalDate> getAllDates(TimeTableSlot timeTableSlot,TimeTable timeTable,DatabaseConnection db){
 
-    public Attendance(String studentID,TimeTableSlot timeTableSlot,TimeTable timeTable,DatabaseConnection db) {
-        try {
-            String multipleSlots = String.format("\'%s\'",timeTableSlot.getIdTimeTableSlot());
-            setTimeSlots(new ArrayList<>());
-            setAllDates(new ArrayList<>());
-            setAbsentDates(new ArrayList<>());
-            getTimeSlots().add(timeTableSlot);
-
-            //If the slot is a lecture, get the other lectures
-
-            if(timeTableSlot.getSlotType().equalsIgnoreCase("Lecture"))
-            {
-                TimeTableSlot slots[] = timeTable.getSlotIds();
-                for(TimeTableSlot slot : slots){
-                    if(timeTableSlot.isSameLecture(slot)){
-                        getTimeSlots().add(slot);
-                        multipleSlots = String.format("%s or \'%s\'",multipleSlots,slot.getIdTimeTableSlot());
-                    }
+        ArrayList<LocalDate> allDates = new ArrayList<>();
+        ArrayList<TimeTableSlot> timeSlots = new ArrayList<TimeTableSlot>();
+        timeSlots.add(timeTableSlot);
+        if(timeTableSlot.getSlotType().equalsIgnoreCase("Lecture"))
+        {
+            TimeTableSlot slots[] = timeTable.getSlotIds();
+            for(TimeTableSlot slot : slots){
+                if(timeTableSlot.isSameLecture(slot)){
+                    timeSlots.add(slot);
                 }
             }
-
-            //Get all dates of this particular slot beginning from the start of the semester
-            LocalDate datePicker = LocalDate.now();
-            LocalDate today = LocalDate.now();
+        }
+        //Get all dates of this particular slot beginning from the start of the semester
+        try {
+            LocalDate datePicker;
+            LocalDate today;
+            ArrayList<LocalDate> holidayDates;
+            datePicker = LocalDate.now();
+            today = LocalDate.now();
             String holidays[];
-            ArrayList<LocalDate> holidayDates = new ArrayList<>();
+            holidayDates = new ArrayList<>();
             ResultSet rs = db.queryDatabase(String.format("SELECT * FROM attendance_manager.semester where startingDate < '%s' and endingDate > '%s'",today,today));
             if(rs.next()){
 
@@ -77,38 +70,47 @@ public class Attendance {
                 if(days.contains(datePicker.getDayOfWeek()) && !holidayDates.contains(datePicker))
                     allDates.add(datePicker);
             }
-
-            rs = db.queryDatabase(String.format("select * from student_attendance_absent where timeTableSlot = %s and idStudent = \'%s\'",multipleSlots,studentID));
-            while (rs.next()){
-                absentDates.add(rs.getDate("date").toLocalDate());
-            }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
-    public ArrayList<TimeTableSlot> getTimeSlots() {
-        return timeSlots;
-    }
-
-    public void setTimeSlots(ArrayList<TimeTableSlot> timeSlots) {
-        this.timeSlots = timeSlots;
-    }
-
-    public ArrayList<LocalDate> getAllDates() {
         return allDates;
     }
 
-    public void setAllDates(ArrayList<LocalDate> allDates) {
-        this.allDates = allDates;
-    }
+    public static ArrayList<LocalDate> getAbsentDates(String studentID,String multipleSlots,DatabaseConnection db){
+        ArrayList<LocalDate> absentDates = new ArrayList<>();
+        try {
+            ResultSet rs = db.queryDatabase(String.format("select * from student_attendance_absent where timeTableSlot = %s and idStudent = \'%s\'",multipleSlots,studentID));
+            while (rs.next()){
+                    absentDates.add(rs.getDate("date").toLocalDate());
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-    public ArrayList<LocalDate> getAbsentDates() {
         return absentDates;
     }
 
-    public void setAbsentDates(ArrayList<LocalDate> absentDates) {
-        this.absentDates = absentDates;
+    public static ArrayList<LocalDate> getFreezeDates(DatabaseConnection db){
+
+        ArrayList<LocalDate> frozenDates = new ArrayList<>();
+
+        try {
+            LocalDate today = LocalDate.now();
+            String frozen[];
+            ResultSet rs = db.queryDatabase(String.format("SELECT * FROM attendance_manager.semester where startingDate < '%s' and endingDate > '%s'",today,today));
+            if(rs.next()){
+                frozen = rs.getString("reviewDates").split(";");
+                LocalDate temp;
+                for (String holiday : frozen){
+                    temp = LocalDate.parse(holiday);
+                    frozenDates.add(temp);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return frozenDates;
     }
+
 }

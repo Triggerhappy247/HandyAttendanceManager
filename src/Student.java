@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 public class Student {
     private String idStudent,studentName;
-    private Attendance attendance;
 
     public Student(String idStudent,TimeTableSlot timeTableSlot,TimeTable timeTable,DatabaseConnection db) {
         try {
@@ -12,7 +11,6 @@ public class Student {
             if (rs.next()){
                 setIdStudent(rs.getString("idStudent"));
                 setStudentName(rs.getString("studentName"));
-                setAttendance(new Attendance(getIdStudent(),timeTableSlot,timeTable,db));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -25,14 +23,6 @@ public class Student {
 
     public void setIdStudent(String idStudent) {
         this.idStudent = idStudent;
-    }
-
-    public Attendance getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(Attendance attendance) {
-        this.attendance = attendance;
     }
 
     public String getStudentName() {

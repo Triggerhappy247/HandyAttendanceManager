@@ -20,6 +20,7 @@ import java.sql.BatchUpdateException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MarkAttendanceController implements Initializable {
@@ -30,6 +31,7 @@ public class MarkAttendanceController implements Initializable {
     private DatabaseConnection db;
     private TimeTable timeTable;
     private String multipleSlots;
+    private ArrayList<LocalDate> frozenDates;
 
     @FXML
     private TableView attendanceTable;
@@ -44,7 +46,7 @@ public class MarkAttendanceController implements Initializable {
     private ComboBox dateList;
 
     @FXML
-    private Label cancelLabel;
+    private Label cancelLabel,frozenLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,7 +80,7 @@ public class MarkAttendanceController implements Initializable {
         absentColumn.setCellValueFactory(
                 new PropertyValueFactory<StudentAttendanceTable,RadioButton>("absent")
         );
-        ObservableList<LocalDate> allDates = FXCollections.observableList(studentList.getStudent().get(0).getAttendance().getAllDates());
+        ObservableList<LocalDate> allDates = FXCollections.observableList(Attendance.getAllDates(timeTableSlot,timeTable,db));
 
         multipleSlots = String.format("'%s'",timeTableSlot.getIdTimeTableSlot());
         if(timeTableSlot.getSlotType().equalsIgnoreCase("Lecture"))
@@ -113,13 +115,11 @@ public class MarkAttendanceController implements Initializable {
 
     public void deleteRecord(String idStudent){
         try {
-            if(!cancelLabel.isVisible()) {
-                saveButton.setDisable(false);
-                saveButton.setText("Save");
-                cancelButton.setText("Cancel");
-                String primarykey = String.format("%s/%s/%s", dateList.getValue().toString(), timeTableSlot.getIdTimeTableSlot(), idStudent);
-                db.addBatch(String.format("delete from student_attendance_absent where primarykey = '%s'", primarykey));
-            }
+            saveButton.setDisable(false);
+            saveButton.setText("Save");
+            cancelButton.setText("Cancel");
+            String primarykey = String.format("%s/%s/%s", dateList.getValue().toString(), timeTableSlot.getIdTimeTableSlot(), idStudent);
+            db.addBatch(String.format("delete from student_attendance_absent where primarykey = '%s'", primarykey));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,13 +127,11 @@ public class MarkAttendanceController implements Initializable {
 
     public void saveRecord(String idStudent){
         try {
-            if(!cancelLabel.isVisible()) {
-                saveButton.setDisable(false);
-                saveButton.setText("Save");
-                cancelButton.setText("Cancel");
-                String primary = String.format("%s/%s/%s", dateList.getValue().toString(), timeTableSlot.getIdTimeTableSlot(), idStudent);
-                db.addBatch(String.format("insert into student_attendance_absent values('%s','%s','%s','%s');", primary, dateList.getValue(), timeTableSlot.getIdTimeTableSlot(), idStudent));
-            }
+            saveButton.setDisable(false);
+            saveButton.setText("Save");
+            cancelButton.setText("Cancel");
+            String primary = String.format("%s/%s/%s", dateList.getValue().toString(), timeTableSlot.getIdTimeTableSlot(), idStudent);
+            db.addBatch(String.format("insert into student_attendance_absent values('%s','%s','%s','%s');", primary, dateList.getValue(), timeTableSlot.getIdTimeTableSlot(), idStudent));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -190,7 +188,9 @@ public class MarkAttendanceController implements Initializable {
         cancelButton.setText("Close");
         cancelSlot.setVisible(true);
         cancelLabel.setVisible(false);
+        frozenLabel.setVisible(false);
         boolean cancelled = false;
+        boolean isFrozen = false;
         setDisableAttendance(false);
         try {
             for (StudentAttendanceTable aStudentTableData : studentTableData) {
@@ -213,6 +213,14 @@ public class MarkAttendanceController implements Initializable {
                 setDisableAttendance(true);
                 for (StudentAttendanceTable aStudentTableData : studentTableData) {
                     aStudentTableData.getAbsent().setSelected(true);
+                }
+            }
+            for(LocalDate freezeDate : frozenDates){
+                if(freezeDate.isAfter(localDate)) {
+                    setDisableAttendance(true);
+                    cancelSlot.setVisible(false);
+                    frozenLabel.setVisible(true);
+                    break;
                 }
             }
         } catch (SQLException e) {
@@ -258,5 +266,13 @@ public class MarkAttendanceController implements Initializable {
 
     public Button getSaveButton() {
         return saveButton;
+    }
+
+    public ArrayList<LocalDate> getFrozenDates() {
+        return frozenDates;
+    }
+
+    public void setFrozenDates(ArrayList<LocalDate> frozenDates) {
+        this.frozenDates = frozenDates;
     }
 }
