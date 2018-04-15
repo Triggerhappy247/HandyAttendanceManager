@@ -191,6 +191,7 @@ public class MarkAttendanceController implements Initializable {
         cancelSlot.setVisible(true);
         cancelLabel.setVisible(false);
         boolean cancelled = false;
+        setDisableAttendance(false);
         try {
             for (StudentAttendanceTable aStudentTableData : studentTableData) {
                 aStudentTableData.getPresent().setSelected(true);
@@ -209,12 +210,21 @@ public class MarkAttendanceController implements Initializable {
             if (cancelled){
                 cancelLabel.setVisible(true);
                 cancelSlot.setVisible(false);
+                setDisableAttendance(true);
                 for (StudentAttendanceTable aStudentTableData : studentTableData) {
                     aStudentTableData.getAbsent().setSelected(true);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setDisableAttendance(boolean isDisable){
+        for (StudentAttendanceTable aStudentTableData : studentTableData) {
+            aStudentTableData.getAbsent().setDisable(isDisable);
+            aStudentTableData.getPresent().setDisable(isDisable);
+
         }
     }
 
