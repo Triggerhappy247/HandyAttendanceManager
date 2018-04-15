@@ -30,7 +30,7 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="198.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Button fx:id="saveButton" layoutX="88.0" layoutY="308.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="55.0" text="Save" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" />
+            <Button fx:id="saveButton" layoutX="88.0" layoutY="308.0" mnemonicParsing="false" onAction="#saveData" prefHeight="21.0" prefWidth="55.0" text="Save" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" />
             <ComboBox fx:id="dateList" layoutX="24.0" layoutY="75.0" prefWidth="150.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" />
             <Label layoutX="87.0" layoutY="45.0" text="Date" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="86.0" />
             <Button fx:id="cancelButton" layoutX="73.0" layoutY="345.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="55.0" text="Cancel" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" />

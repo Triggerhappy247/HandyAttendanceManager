@@ -104,13 +104,6 @@ public class MarkAttendanceController implements Initializable {
 
         dateList.setItems(allDates);
         dateList.setValue(allDates.get(allDates.size() - 1));
-
-        saveButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                saveData();
-            }
-        });
     }
 
     public void deleteRecord(String idStudent){
@@ -170,6 +163,7 @@ public class MarkAttendanceController implements Initializable {
     public void saveData(){
         saveButton.setDisable(true);
         saveButton.setText("Saving...");
+        cancelSlot.setVisible(false);
         try {
             db.batchUpdate();
             saveButton.setText("Saved!");
