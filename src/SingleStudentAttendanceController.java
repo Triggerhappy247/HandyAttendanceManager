@@ -35,19 +35,23 @@ public class SingleStudentAttendanceController implements Initializable {
 
     public void populateStudentTable(String idStudent,String slots,ArrayList<LocalDate> allDates,DatabaseConnection db){
         ArrayList<LocalDate> absentDates = Attendance.getAbsentDates(idStudent,slots,db);
+        ArrayList<LocalDate> cancelDates = Attendance.getCancelledDates(slots,db);
         ObservableList<SingleStudentTable> studentAttendance = FXCollections.observableArrayList();
 
-        double percentage = (1 - (double)absentDates.size()/allDates.size()) * 100;
+        double percentage = (1 - (double)absentDates.size()/(allDates.size() - cancelDates.size())) * 100;
         attendancePercentage.setText(String.format("%.2f%%",percentage));
+        SingleStudentTable temp;
         for (LocalDate localDate : allDates)
         {
             if(absentDates.contains(localDate)) {
-                SingleStudentTable temp = new SingleStudentTable(localDate.toString(),"Absent");
-                studentAttendance.add(temp);
-            } else {
-                SingleStudentTable temp = new SingleStudentTable(localDate.toString(),"Present");
-                studentAttendance.add(temp);
+                temp = new SingleStudentTable(localDate.toString(),"Absent");
+            }else if(cancelDates.contains(localDate)){
+                temp = new SingleStudentTable(localDate.toString(),"Cancelled");
             }
+            else {
+               temp = new SingleStudentTable(localDate.toString(),"Present");
+            }
+            studentAttendance.add(temp);
         }
 
         studentAttendanceTable.setItems(studentAttendance);

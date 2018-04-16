@@ -82,13 +82,27 @@ public class Attendance {
         try {
             ResultSet rs = db.queryDatabase(String.format("select * from student_attendance_absent where timeTableSlot = %s and idStudent = \'%s\'",multipleSlots,studentID));
             while (rs.next()){
-                    absentDates.add(rs.getDate("date").toLocalDate());
-                }
+                absentDates.add(rs.getDate("date").toLocalDate());
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return absentDates;
+    }
+
+    public static ArrayList<LocalDate> getCancelledDates(String multipleSlots,DatabaseConnection db){
+        ArrayList<LocalDate> cancelDates = new ArrayList<>();
+        try {
+            ResultSet rs = db.queryDatabase(String.format("select * from student_attendance_absent where timeTableSlot = %s and idStudent = 'Cancelled'",multipleSlots));
+            while (rs.next()){
+                cancelDates.add(rs.getDate("date").toLocalDate());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return cancelDates;
     }
 
     public static ArrayList<LocalDate> getFreezeDates(DatabaseConnection db){
